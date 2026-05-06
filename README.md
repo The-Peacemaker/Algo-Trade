@@ -1,6 +1,6 @@
 # Algorithmic Trading System
 
-A disciplined, risk-managed algorithmic trading system for Indian stock markets. Built with Python, designed for automation.
+A disciplined, risk-managed algorithmic trading system for Indian stock markets.
 
 ## Features
 
@@ -23,18 +23,6 @@ python3 historical_backtest.py
 python3 dashboard.py
 ```
 
-## Configuration
-
-Edit `broker_angelone.py` with your credentials:
-
-```python
-CONFIG = {
-    "api_key": "YOUR_API_KEY",
-    "client_code": "YOUR_CLIENT_ID",
-    "pin": "YOUR_PIN"
-}
-```
-
 ## Project Structure
 
 ```
@@ -48,6 +36,12 @@ CONFIG = {
 └── templates/
     └── index.html # UI
 ```
+
+## Supported Brokers
+
+- Angel One SmartAPI (recommended - free)
+- Zerodha Kite (documentation provided)
+- Groww Trade API (paid subscription)
 
 ## License
 
