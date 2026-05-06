@@ -240,6 +240,13 @@ class StrategyEngine:
         score = 0
         reasons = []
         
+        # 0. Best trading time: 9:15-10:30 AM (high volatility)
+        now_hour = datetime.now().hour
+        is_best_time = 9 <= now_hour <= 10
+        if is_best_time:
+            score += 1
+            reasons.append("✓ Best trading time")
+        
         # 1. Price above VWAP (critical)
         if data.current_price > data.vwap:
             score += 2
@@ -255,17 +262,25 @@ class StrategyEngine:
             score += 1
             reasons.append("✓ EMA9 > EMA21")
         
-        # 3. Volume confirmation (must have)
-        if data.volume > data.avg_volume * 1.3:
+        # 3. Volume confirmation (must have) - increased threshold
+        if data.volume > data.avg_volume * 1.5:
             score += 2
-            reasons.append("✓ Volume spike")
-        elif data.volume > data.avg_volume:
+            reasons.append("✓ Strong volume spike")
+        elif data.volume > data.avg_volume * 1.2:
+            score += 1
+            reasons.append("✓ Volume up")
+        
+        # 4. RSI momentum (not overbought)
+        if 35 < data.rsi < 55:
+            score += 2
+            reasons.append("✓ RSI building momentum")
+        elif 30 < data.rsi < 65:
             score += 1
         
-        # 4. RSI momentum
-        if 35 < data.rsi < 65:
+        # 5. Price momentum (breaking higher)
+        if prev_data and data.current_price > prev_data.current_price:
             score += 1
-            reasons.append("✓ RSI in range")
+            reasons.append("✓ Price rising")
         
         return {"score": score, "reasons": reasons}
 
@@ -300,11 +315,12 @@ class StrategyEngine:
         entry_price = data.current_price
         
         if direction == TradeDirection.LONG:
-            stop_loss = entry_price * 0.985  # 1.5% stop
-            target = entry_price * 1.035  # 3.5% target (1:2.3 RR)
+            # Optimized: 1% stop, 2% target (1:2 ratio for small capital)
+            stop_loss = entry_price * 0.99   # 1% stop loss
+            target = entry_price * 1.02     # 2% target (1:2 RR)
         else:
-            stop_loss = entry_price * 1.015
-            target = entry_price * 0.965
+            stop_loss = entry_price * 1.01
+            target = entry_price * 0.98
         
         risk_percent = abs(entry_price - stop_loss) / entry_price * 100
         risk_reward_ratio = abs(target - entry_price) / abs(entry_price - stop_loss)
@@ -432,33 +448,66 @@ class TradingSystem:
 
     def check_exit_conditions(self, symbol: str, data: MarketData):
         """Check if any active trade should be exited"""
+        from datetime import timedelta
+        
         for trade in self.active_trades:
             if trade.symbol != symbol:
                 continue
             
             should_exit = False
             exit_reason = ""
+            current_time = datetime.now()
+            trade_duration = (current_time - trade.entry_time).total_seconds() / 60  # minutes
             
+            # Calculate profit percentage
             if trade.direction == TradeDirection.LONG:
-                if data.current_price <= trade.stop_loss:
-                    should_exit = True
-                    exit_reason = "Stop loss hit"
-                elif data.current_price >= trade.target_price:
-                    should_exit = True
-                    exit_reason = "Target reached"
-                elif data.current_price < data.vwap:
-                    should_exit = True
-                    exit_reason = "Price below VWAP (trend reversal)"
+                profit_pct = (data.current_price - trade.entry_price) / trade.entry_price * 100
             else:
-                if data.current_price >= trade.stop_loss:
+                profit_pct = (trade.entry_price - data.current_price) / trade.entry_price * 100
+            
+            # TRAILING STOP: Move to breakeven if 50% of target reached
+            if profit_pct >= 1.0 and trade.direction == TradeDirection.LONG:
+                new_stop = trade.entry_price  # Move to breakeven
+                if data.current_price <= new_stop:
                     should_exit = True
-                    exit_reason = "Stop loss hit"
-                elif data.current_price <= trade.target_price:
+                    exit_reason = "Trailing stop (breakeven)"
+            elif profit_pct >= 1.0 and trade.direction == TradeDirection.SELL:
+                new_stop = trade.entry_price
+                if data.current_price >= new_stop:
                     should_exit = True
-                    exit_reason = "Target reached"
-                elif data.current_price > data.vwap:
+                    exit_reason = "Trailing stop (breakeven)"
+            
+            # Regular exits
+            if not should_exit:
+                if trade.direction == TradeDirection.LONG:
+                    if data.current_price <= trade.stop_loss:
+                        should_exit = True
+                        exit_reason = "Stop loss hit"
+                    elif data.current_price >= trade.target_price:
+                        should_exit = True
+                        exit_reason = "Target reached"
+                    elif data.current_price < data.vwap:
+                        should_exit = True
+                        exit_reason = "Price below VWAP (trend reversal)"
+                else:
+                    if data.current_price >= trade.stop_loss:
+                        should_exit = True
+                        exit_reason = "Stop loss hit"
+                    elif data.current_price <= trade.target_price:
+                        should_exit = True
+                        exit_reason = "Target reached"
+                    elif data.current_price > data.vwap:
+                        should_exit = True
+                        exit_reason = "Price above VWAP (trend reversal)"
+            
+            # TIME-BASED EXIT: Close if held > 45 minutes (for small capital quick trades)
+            if not should_exit and trade_duration > 45:
+                if profit_pct > 0.3:  # Small profit? Take it
                     should_exit = True
-                    exit_reason = "Price above VWAP (trend reversal)"
+                    exit_reason = f"Time exit (45min, +{profit_pct:.1f}%)"
+                elif profit_pct > -0.3:  # Small loss? Exit breakeven
+                    should_exit = True
+                    exit_reason = f"Time exit (45min, {profit_pct:.1f}%)"
             
             if should_exit:
                 self.exit_trade(trade, data.current_price, exit_reason)
