@@ -116,15 +116,13 @@ class GTTOrder:
     """
     order_id: str
     symbol: str
+    quantity: int
+    side: str
+    trigger_price: float
     
     # Trigger conditions
     trigger_type: str = "single"  # single, oco
-    trigger_price: float = 0
     trigger_type2: float = 0  # For OCO
-    
-    # Order details
-    quantity: int
-    side: str  # BUY or SELL
     order_type: str = "limit"
     
     # Active until
@@ -181,19 +179,16 @@ class TrailingStopOrder:
     """
     order_id: str
     symbol: str
-    
     initial_stop: float
-    trailing_percent: float  # % to trail
+    trailing_percent: float
+    quantity: int
+    side: str
     
     activation_percent: float = 0  # Must move this % before activating
     activation_price: float = 0
-    
-    current_stop: float
+    current_stop: float = 0
     highest_price: float = 0
     lowest_price: float = 0
-    
-    quantity: int
-    side: str  # BUY or SELL
     status: OrderStatus = OrderStatus.OPEN
     
     def update(self, current_price: float):
