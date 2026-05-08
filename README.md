@@ -63,6 +63,8 @@ equity markets (NSE). It implements professional quant strategies with:
 
 ## 2. Architecture
 
+![System Architecture](Image/architechture.png)
+
 ```
 +------------------+     +------------------+     +------------------+
 |   Data Layer     | --> |  Strategy Layer | --> | Execution Layer |
