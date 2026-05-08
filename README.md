@@ -65,25 +65,6 @@ equity markets (NSE). It implements professional quant strategies with:
 
 ![System Architecture](Image/architechture.png)
 
-```
-+------------------+     +------------------+     +------------------+
-|   Data Layer     | --> |  Strategy Layer | --> | Execution Layer |
-+------------------+     +------------------+     +------------------+
-| - market_analyzer|     | - professional_ |     | - broker_    |
-| - data_fetcher   |     |   strategy      |     |   angelone   |
-| - groww_        |     | - institutional_|     | - advanced_  |
-|   connector     |     |   trading       |     |   orders    |
-+------------------+     +------------------+     +------------------+
-        |                        |                        |
-        v                        v                        v
-+------------------+     +------------------+     +------------------+
-| Risk Layer       |     | Analytics Layer |     | Alert Layer     |
-+------------------+     +------------------+     +------------------+
-| - portfolio_risk|     | - backtest_    |     | - alerts      |
-| - position_     |     |   engine       |     | - dashboard  |
-|   sizing        |     | - real_backtest|     | - logs       |
-+------------------+     +------------------+     +------------------+
-```
 
 ### Data Flow
 
