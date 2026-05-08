@@ -451,29 +451,6 @@ class PositionConfig:
 
 ---
 
-## Disclaimer
-
-This software is for educational purposes. Trading in financial markets
-involves substantial risk. Past performance does not guarantee
-future results. Use at your own risk.
-
----
-
-## License
-
-MIT License - See LICENSE file for details.
-
----
-
-## Author
-
-Built with institutional standards for algorithmic trading.
-For questions, contributions, or issues, please open a GitHub issue.
-
-<!--
-================================================================================
-END OF README
-================================================================================
 
 ## Limitations and Disclaimers
 
@@ -561,6 +538,25 @@ involves substantial risk, including total loss of capital.
 
 The authors and contributors assume no liability for any losses
 incurred through the use of this software.
+
+---
+
+## License
+
+MIT License - See LICENSE file for details.
+
+---
+
+## Author
+
+Built with institutional standards for algorithmic trading.
+For questions, contributions, or issues, please open a GitHub issue.
+
+---
+<!--
+================================================================================
+END OF README
+================================================================================
 
 ================================================================================
 -->
