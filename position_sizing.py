@@ -29,10 +29,18 @@ class RiskProfile(Enum):
 class PositionConfig:
     """Position configuration"""
     budget: float
-    max_risk_percent: float = 2.0  # % of budget per trade
-    max_daily_risk_percent: float = 6.0  # Max daily loss
-    max_position_size: int = 10  # Max lots per trade
+    max_risk_percent: float = 2.0
+    max_daily_risk_percent: float = 6.0
+    max_position_size: int = 10
     min_trade_size: int = 1
+    
+    def __post_init__(self):
+        if self.budget < 500:
+            self.max_position_size = 1
+        elif self.budget < 2000:
+            self.max_position_size = 3
+        elif self.budget < 10000:
+            self.max_position_size = 5
 
 
 class AdaptiveSizingEngine:
@@ -98,6 +106,26 @@ class AdaptiveSizingEngine:
         kelly = max(0, min(kelly * 0.5, 0.25))
         return kelly
     
+    def _get_max_leverage(self) -> float:
+        """Get maximum leverage based on risk profile"""
+        limits = {
+            RiskProfile.ULTRASAFE: 1.0,      # No leverage
+            RiskProfile.CONSERVATIVE: 1.0,   # No leverage
+            RiskProfile.MODERATE: 2.0,      # 2x leverage
+            RiskProfile.AGGRESSIVE: 3.0      # 3x leverage
+        }
+        return limits[self.risk_profile]
+    
+    def _get_max_leverage(self) -> float:
+        """Get maximum leverage based on risk profile"""
+        limits = {
+            RiskProfile.ULTRASAFE: 1.0,
+            RiskProfile.CONSERVATIVE: 1.0,
+            RiskProfile.MODERATE: 2.0,
+            RiskProfile.AGGRESSIVE: 3.0
+        }
+        return limits[self.risk_profile]
+    
     def calculate_position_size(
         self,
         entry_price: float,
@@ -115,6 +143,23 @@ class AdaptiveSizingEngine:
         Returns:
             dict with quantity, risk_amount, risk_percent
         """
+        max_leverage = self._get_max_leverage()
+        max_affordable = self.config.budget * max_leverage
+        
+        if entry_price > max_affordable:
+            return {
+                "quantity": 0,
+                "entry_price": entry_price,
+                "stop_loss": stop_loss,
+                "risk_amount": 0,
+                "risk_percent": 0,
+                "target_price": entry_price,
+                "kelly_fraction": 0,
+                "budget_used": entry_price,
+                "budget_utilization": 100,
+                "error": f"Stock ₹{entry_price} exceeds max affordable ₹{max_affordable}"
+            }
+        
         # Risk per share
         risk_per_share = abs(entry_price - stop_loss)
         if risk_per_share == 0:
@@ -146,6 +191,24 @@ class AdaptiveSizingEngine:
             )
         )
         
+        # Ensure we can afford this quantity
+        while (quantity * entry_price) > max_affordable and quantity > 1:
+            quantity -= 1
+        
+        if quantity < self.config.min_trade_size:
+            return {
+                "quantity": 0,
+                "entry_price": entry_price,
+                "stop_loss": stop_loss,
+                "risk_amount": 0,
+                "risk_percent": 0,
+                "target_price": entry_price,
+                "kelly_fraction": 0,
+                "budget_used": entry_price,
+                "budget_utilization": 100,
+                "error": f"Cannot afford any lot at ₹{entry_price} with ₹{self.config.budget}"
+            }
+        
         # Actual risk
         actual_risk = quantity * risk_per_share
         actual_risk_percent = (actual_risk / self.config.budget) * 100
@@ -156,7 +219,7 @@ class AdaptiveSizingEngine:
             "stop_loss": stop_loss,
             "risk_amount": round(actual_risk, 2),
             "risk_percent": round(actual_risk_percent, 2),
-            "target_price": entry_price * (1 + 0.02),  # 2% target
+            "target_price": entry_price * (1 + 0.02),
             "kelly_fraction": round(kelly * 100, 1),
             "budget_used": round((quantity * entry_price), 2),
             "budget_utilization": round((quantity * entry_price / self.config.budget) * 100, 1)
