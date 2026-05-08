@@ -1,23 +1,15 @@
 <!--
+================================================================================
+QUANTFLOW - INSTITUTIONAL-GRADE ALGORITHMIC TRADING SYSTEM
+================================================================================
+A professional-grade quantitative trading system for Indian equity markets.
+Built with institutional standards: risk management, position sizing,
+multi-timeframe analysis, and real-time market data processing.
 
-╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                                                                  ║
-║    ██████╗   ██████╗  █████╗ ███╗   ██╗███████╗ ██████╗ ███╗   ███╗      ██████╗  ██╗  ██╗ █████╗ ██████╗ ██████╗                  ║
-║   ██╔════╝  ██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔═══██╗████╗ ████║     ██╔══██╗ ██║  ██║██╔══██╗██╔══██╗██╔══██╗                 ║
-║   ██║       ██████╔╝███████║██╔██╗ ██║█████╗  ██║   ██║██╔████╔██║     ██████╔╝ ███████║███████║██████╔╝██║  ██║                 ║
-║   ██║       ██╔══██╗██╔══██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╔╝██║     ██╔═══╝  ██╔══██║██╔══██║██╔══██╗██║  ██║                 ║
-║   ╚██████╗  ██║  ██║██║  ██║██║ ╚████║███████╗╚██████╔╝██║ ╚═╝ ██║     ██║      ██║  ██║██║  ██║██║  ██║██████╔╝                 ║
-║    ╚═════╝  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝      ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝                  ║
-║                                                                                                                                  ║
-║                                    ███████╗ ██████╗ ██████╗ ███████╗ ██████╗  ██████╗ ███████╗████████╗                                          ║
-║                                    ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔═══██╗██╔════╝ ██╔════╝╚══██╔══╝                                          ║
-║                                    █████╗  ██║   ██║██████╔╝█████╗  ██║   ██║██║  ███╗█████╗    ███████╗  █████╗ ██████╗  █████╗ ██████╗ ██████╗  ║
-║                                    ██╔══╝  ██║   ██║██╔══██╗██╔══╝  ██║   ██║██║   ██║██╔══╝    ╚════██║ ██╔══██╗██╔══██╗██╔══██╗██╔══██╗ ██╔══╝   ║
-║                                    ███████╗╚██████╔╝██║  ██║███████╗╚██████╔╝╚██████╔╝███████╗   ███████║ ███████║██████╔╝███████║██████╔╝ ███████╗
-║                                    ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝   ╚══════╝ ╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝   ╚══════╝
-║                                                                                                                                  ║
-╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
-
+Author: Trading System Architecture
+License: MIT
+Platform: Python 3.11+ / Linux
+================================================================================
 -->
 
 <p align="center">
@@ -27,637 +19,465 @@
   <img src="https://img.shields.io/badge/Platform-Linux-lightgrey?style=for-the-badge&logo=linux" alt="Platform">
 </p>
 
-<p align="center">
-  <a href="https://github.com/The-Peacemaker/Algo-Trade">
-    <img src="https://img.shields.io/github/stars/The-Peacemaker/Algo-Trade?style=social" alt="Stars">
-  </a>
-  <a href="https://github.com/The-Peacemaker/Algo-Trade">
-    <img src="https://img.shields.io/github/forks/The-Peacemaker/Algo-Trade?style=social" alt="Forks">
-  </a>
-  <a href="https://github.com/The-Peacemaker/Algo-Trade">
-    <img src="https://img.shields.io/github/watchers/The-Peacemaker/Algo-Trade?style=social" alt="Watchers">
-  </a>
-</p>
+---
+
+## Table of Contents
+1. [Overview](#1-overview)
+2. [Architecture](#2-architecture)
+3. [Core Modules](#3-core-modules)
+4. [Technical Indicators](#4-technical-indicators)
+5. [Risk Management](#5-risk-management)
+6. [Backtest Engine](#6-backtest-engine)
+7. [Usage](#7-usage)
+8. [Performance](#8-performance)
+9. [Installation](#9-installation)
+10. [Configuration](#10-configuration)
 
 ---
 
-# ⚡ QuantFlow — Institutional-Grade Algorithmic Trading System
+## 1. Overview
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=The-Peacemaker&repo=Algo-Trade&style=flat-square&label=Profile+Views&color=00ff88&style=for-the-badge" alt="Profile Views">
-</p>
+QuantFlow is an institutional-grade algorithmic trading system designed for the Indian
+equity markets (NSE). It implements professional quant strategies with:
 
-## 📋 Table of Contents
+- Multi-timeframe market analysis (1m, 5m, 15m, 1h)
+- 15+ technical indicators (VWAP, EMA, RSI, MACD, Bollinger, Stochastic)
+- Candlestick pattern recognition
+- Adaptive position sizing (Rs.100 - Rs.5,00,000)
+- Kelly Criterion-based risk management
+- Real-time data from yfinance/NSE
+- Broker integration ready (Angel One SmartAPI)
 
-1. [Overview](#-overview)
-2. [Architecture](#-architecture)
-3. [Features](#-features)
-4. [System Design](#-system-design)
-5. [Quick Start](#-quick-start)
-6. [Configuration](#-configuration)
-7. [Strategy Details](#-strategy-details)
-8. [Risk Management](#-risk-management)
-9. [API Integration](#-api-integration)
-10. [Testing](#-testing)
-11. [Performance](#-performance)
-12. [Roadmap](#-roadmap)
-13. [Contributing](#-contributing)
-14. [License](#-license)
+### Key Features
 
----
-
-## 📊 Overview
-
-**QuantFlow** is an institutional-grade algorithmic trading system designed for the Indian stock markets. Built with a focus on **risk management**, **capital preservation**, and **quantitative rigor**, it implements professional trading strategies used by quant funds worldwide.
-
-### 🎯 Key Principles
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                                                            │
-│   ₁. CAPITAL PRESERVATION  →  Never risk more than 2% per trade                          │
-│   ₂. DISCIPLINED EXECUTION →  Rules-based, emotionless trading                          │
-│   ₃. QUANTITATIVE RIGOR  →  Data-driven decisions, not speculation                      │
-│   ₄. RISK-ADAPTIVE       →  Dynamic position sizing based on account performance       │
-│   ₅. MULTI-TIMEFRAME     →  Higher timeframe confirmation for entries                    │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
-### 💰 Supported Budget Ranges
-
-| Budget Range | Risk Profile | Max Positions | Target Returns |
-|-------------|--------------|--------------|----------------|
-| ₹100 - ₹500 | UltraSafe    | 1            | 1-2%/day      |
-| ₹500 - ₹5,000 | Conservative | 2            | 1-1.5%/day    |
-| ₹5,000 - ₹50,000 | Moderate    | 3            | 0.8-1%/day   |
-| ₹50,000+ | Aggressive  | 5            | 0.5-0.8%/day |
+| Feature | Implementation |
+|---------|-------------|
+| Position Sizing | Adaptive Kelly Criterion |
+| Risk per Trade | 1-2% of capital |
+| Max Daily Loss | 6% auto-stop |
+| Stop Loss | 1.5x ATR |
+| Target | 2.5x ATR (minimum 2R) |
+| Max Positions | 1-5 concurrent |
 
 ---
 
-## 🏗️ Architecture
-
-### System Overview
+## 2. Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                    QUANTFLOW ARCHITECTURE                                                      │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                                                                  │
-│  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐          │
-│  │   BROKER    │     │    DATA     │     │   STRATEGY  │     │    RISK     │     │   ORDER     │          │
-│  │   LAYER     │────▶│   LAYER     │────▶│   ENGINE     │────▶│   MANAGER    │────▶│   EXECUTION │          │
-│  │              │     │              │     │              │     │              │     │              │          │
-│  │ • Angel One │     │ • Real-time  │     │ • Multi-Signal│     │ • Position   │     │ • Bracket   │          │
-│  │ • Groww     │     │ • Historical │     │ • VWAP       │     │ • Portfolio  │     │ • GTT       │          │
-│  │ • WebSocket │     │ • Indicators │     │ • EMA Cross  │     │ • Drawdown   │     │ • Trailing  │          │
-│  └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘          │
-│          │                    │                    │                    │                    │                    │
-│          └────────────────────┴────────────────────┴────────────────────┴────────────────────┘                    │
-│                                                    │                                                                     │
-│                                                    ▼                                                                     │
-│  ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐   │
-│  │                                              DASHBOARD                                                   │   │
-│  │   • Real-time P&L    • Equity Curve    • Trade Log    • Signal Monitor    • Risk Metrics          │   │
-│  └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                                                    │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
++------------------+     +------------------+     +------------------+
+|   Data Layer     | --> |  Strategy Layer | --> | Execution Layer |
++------------------+     +------------------+     +------------------+
+| - market_analyzer|     | - professional_ |     | - broker_    |
+| - data_fetcher   |     |   strategy      |     |   angelone   |
+| - groww_        |     | - institutional_|     | - advanced_  |
+|   connector     |     |   trading       |     |   orders    |
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        v                        v                        v
++------------------+     +------------------+     +------------------+
+| Risk Layer       |     | Analytics Layer |     | Alert Layer     |
++------------------+     +------------------+     +------------------+
+| - portfolio_risk|     | - backtest_    |     | - alerts      |
+| - position_     |     |   engine       |     | - dashboard  |
+|   sizing        |     | - real_backtest|     | - logs       |
++------------------+     +------------------+     +------------------+
 ```
 
 ### Data Flow
 
-```
-                                    ┌─────────────────────────┐
-                                    │    MARKET DATA FEED    │
-                                    │  (Broker WebSocket)    │
-                                    └───────────┬─────────────┘
-                                                │
-                    ┌───────────────────────────┬───┴───────────────────────────┐
-                    │                           │                               │
-                    ▼                           ▼                               ▼
-           ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-           │   DATA MANAGER  │     │   DATA MANAGER  │     │   DATA MANAGER  │
-           │                 │     │                 │     │                 │
-           │ • 1-minute      │     │ • 5-minute      │     │ • 15-minute     │
-           │ • Price Cache   │     │ • VWAP Calc     │     │ • EMA Calc       │
-           │ • Volume Track │     │ • RSI Calc      │     │ • Trend Detect   │
-           └────────┬────────┘     └────────┬────────┘     └────────┬────────┘
-                    │                      │                      │
-                    └──────────────────────┼──────────────────────┘
-                                         │
-                                         ▼
-                              ┌─────────────────────────┐
-                              │   STRATEGY ENGINE      │
-                              │                        │
-                              │  1. Signal Detection  │
-                              │  2. Confidence Calc   │
-                              │  3. Strategy Filter  │
-                              └───────────┬─────────────┘
-                                          │
-                                          ▼
-                              ┌─────────────────────────┐
-                              │  POSITION SIZING      │
-                              │                        │
-                              │ • Kelly Criterion     │
-                              │ • Volatility Adj      │
-                              │ • Budget-Aware        │
-                              └───────────┬─────────────┘
-                                          │
-                                          ▼
-                              ┌─────────────────────────┐
-                              │   RISK MANAGER         │
-                              │                        │
-                              │ • Daily Loss Limit     │
-                              │ • Max Positions       │
-                              │ • Sector Exposure     │
-                              │ • Correlation Check   │
-                              └───────────┬─────────────┘
-                                          │
-                    ┌─────────────────────┴─────────────────────┐
-                    │                                           │
-                    ▼                                           ▼
-           ┌─────────────────┐                      ┌─────────────────┐
-           │   BRACKET ORDER │                      │   LIVE TRADE    │
-           │   (Auto-TP/SL)  │                      │   (Paper/Live)  │
-           └─────────────────┘                      └─────────────────┘
-```
+1. Market data fetched from yfinance (real-time) or mock data (testing)
+2. Technical indicators calculated (VWAP, RSI, MACD, etc.)
+3. Signal generated based on confluence of factors
+4. Position size calculated using Kelly Criterion
+5. Risk manager validates trade
+6. Order executed via broker API
+7. Results logged for analytics
 
 ---
 
-## ✨ Features
+## 3. Core Modules
 
-### Core Trading Engine
+### 3.1 Market Data
 
-| Feature | Description |
-|---------|-------------|
-| **Multi-Signal Analysis** | 6 signal types: VWAP Breakout, EMA Crossover, RSI Momentum, Volume Spike, Price Action, Support/Resistance |
-| **Strategy Types** | Momentum, Mean Reversion, Breakout, Scalping, Composite |
-| **Timeframes** | 1m, 5m, 15m, 1h, 1d with cross-timeframe confirmation |
-| **Indicators** | VWAP, EMA (9/21/50), RSI (14), Volume |
+| Module | Purpose |
+|--------|---------|
+| market_analyzer.py | Real-time technical analysis with 15+ indicators |
+| data_fetcher.py | OHLCV management, mock data provider |
+| groww_connector.py | Groww API integration |
+| live_data.py | WebSocket/REST data feeds |
 
-### Risk Management
+### 3.2 Trading Engine
 
-| Feature | Description |
-|---------|-------------|
-| **Adaptive Position Sizing** | Kelly Criterion + budget-aware scaling |
-| **Portfolio Risk Manager** | Daily P&L limits, consecutive loss protection |
-| **Drawdown Protection** | Auto-trading disable at -6% daily loss |
-| **Sector Exposure** | Configurable limits per sector |
+| Module | Purpose |
+|--------|---------|
+| professional_strategy.py | Institutional-grade signal generation |
+| institutional_trading.py | Complete trading engine with backtest |
+| real_backtest.py | Real NSE data backtesting |
+| strategy_engine.py | Multi-signal quant engine |
 
-### Order Types
+### 3.3 Risk Management
 
-| Order Type | Description |
-|------------|-------------|
-| **Bracket Orders** | Entry + Target + Stop Loss in one package |
-| **GTT** | Good-Till-Triggered orders |
-| **Trailing Stop** | Dynamic stop with activation threshold |
-| **AMO** | After-Market Order queuing |
+| Module | Purpose |
+|--------|---------|
+| position_sizing.py | Adaptive position sizing with affordability check |
+| portfolio_risk.py | Portfolio risk manager with drawdown protection |
+| multiframe.py | Multi-timeframe confirmation |
 
-### Analytics
+### 3.4 Order Execution
+
+| Module | Purpose |
+|--------|---------|
+| broker_angelone.py | Angel One SmartAPI integration |
+| advanced_orders.py | Bracket orders, GTT, trailing stops |
+| trading_system.py | Main trading system coordinator |
+
+### 3.5 Analytics
+
+| Module | Purpose |
+|--------|---------|
+| backtest_engine.py | Professional backtest with Sharpe/Sortino |
+| stocks.py | Stock universe management |
+| alerts.py | Alert system |
+
+---
+
+## 4. Technical Indicators
+
+The system calculates and uses the following indicators:
+
+### 4.1 Trend Indicators
+
+| Indicator | Period | Purpose |
+|-----------|---------|---------|
+| SMA | 9, 20, 50 | Simple moving average |
+| EMA | 9, 21, 50 | Exponential moving average |
+| VWAP | 50 | Volume-weighted average price |
+| MACD | 12, 26, 9 | Momentum convergence divergence |
+
+### 4.2 Momentum Indicators
+
+| Indicator | Period | Purpose |
+|-----------|---------|---------|
+| RSI | 14 | Relative strength index |
+| Stochastic | 14 | Stochastic oscillator |
+| CCI | 20 | Commodity channel index |
+
+### 4.3 Volatility Indicators
+
+| Indicator | Period | Purpose |
+|-----------|---------|---------|
+| ATR | 14 | Average true range |
+| Bollinger Bands | 20, 2 | Price envelope |
+
+### 4.4 Volume Indicators
+
+| Indicator | Purpose |
+|-----------|---------|
+| Volume Ratio | Current / Average volume |
+| OBV | On-balance volume |
+| VWAP Volume | Volume-weighted price |
+
+### 4.5 Candlestick Patterns
+
+The system detects:
+- Hammer / Hanging Man
+- Morning Star / Evening Star
+- Bullish / Bearish Engulfing
+- Three White Soldiers / Three Black Crows
+- Doji
+- Marubozu
+
+---
+
+## 5. Risk Management
+
+### 5.1 Position Sizing
+
+The system uses Kelly Criterion with fractional Kelly (0.5):
+
+```
+Kelly% = W - ((1-W) / R)
+
+Where:
+  W = Win rate
+  R = Win/Loss ratio
+```
+
+### 5.2 Risk Profiles
+
+| Budget | Profile | Max Risk | Max Positions |
+|--------|---------|----------|---------------|
+| < Rs.500 | ULTRASAFE | 1% | 1 |
+| Rs.500-5000 | CONSERVATIVE | 1.5% | 2 |
+| Rs.5000-50000 | MODERATE | 2% | 3 |
+| > Rs.50000 | AGGRESSIVE | 2% | 5 |
+
+### 5.3 Affordability Check
+
+For low budgets (Rs.100-500), the system checks:
+
+1. Stock price <= max affordable (budget * leverage)
+2. Quantity calculation respects capital
+3. Returns error if unaffordable
+
+```python
+# Example: Rs.200 budget
+max_affordable = 200 * 1.0  # No leverage for ultrasafe
+if stock_price > max_affordable:
+    return {"quantity": 0, "error": "Stock exceeds max affordable"}
+```
+
+### 5.4 Daily Limits
+
+| Limit | Value |
+|-------|-------|
+| Max Daily Loss | 6% of capital |
+| Max Consecutive Losses | 3 (auto-disable trading) |
+| Max Total Exposure | 20% of capital |
+
+---
+
+## 6. Backtest Engine
+
+### 6.1 Analytics Provided
 
 | Metric | Description |
-|--------|-------------|
-| **Sharpe Ratio** | Risk-adjusted returns |
-| **Sortino Ratio** | Downside risk-adjusted returns |
-| **Max Drawdown** | Peak-to-trough decline |
-| **Profit Factor** | Gross profit / Gross loss |
-| **Win Rate** | Profitable trade percentage |
+|-------|-------------|
+| Sharpe Ratio | Risk-adjusted return |
+| Sortino Ratio | Downside risk-adjusted return |
+| Max Drawdown | Largest peak-to-trough |
+| Profit Factor | Gross profit / Gross loss |
+| Win Rate | Winning trades / Total trades |
+| Avg Holding Time | Mean trade duration |
+
+### 6.2 Backtest Results (Real NSE Data)
+
+| Symbol | Trades | Win Rate | P&L |
+|--------|--------|---------|-----|
+| RELIANCE | 28 | 64% | +Rs.91.84 |
+| TCS | 12 | 50% | +Rs.10.78 |
+| KOTAKBANK | 28 | 43% | +Rs.22.36 |
+| INFY | 12 | 50% | +Rs.2.60 |
+
+### 6.3 Rs.200 Test
+
+| Metric | Value |
+|--------|-------|
+| Capital | Rs.200 |
+| Trades | 10 |
+| Win Rate | 50% |
+| P&L | +Rs.0.25 |
+| Final Capital | Rs.200.25 |
 
 ---
 
-## 🚀 Quick Start
+## 7. Usage
 
-### Installation
+### 7.1 Market Analysis
 
 ```bash
-# Clone the repository
-git clone https://github.com/The-Peacemaker/Algo-Trade.git
-cd Algo-Trade
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Or install individually
-pip install flask flask-socketio yfinance numpy pandas
+python3 market_analyzer.py
 ```
 
-### Running the System
+Output:
+```
+======================================================================
+REAL-TIME MARKET ANALYZER - NSE DATA
+======================================================================
+
+======================================================================
+MARKET SCAN RESULTS
+======================================================================
+
+    INFY       | ₹ 1179.90 |    +0.50 (+0.04%)
+======================================================================
+  Signal:   neutral    | Confidence: 22% | Trend: bullish
+  Summary: NEUTRAL - Score: 22 | Price > SMA20 | Price > EMA9
+
+--- Technical Indicators ---
+  Price:     ₹1179.90 | Open: ₹1179.30 | High: ₹1180.00 | Low: ₹1179.00
+  SMA:       9:1180.31 | 20:1179.35 | 50:1175.09
+  EMA:       9:1179.81 | 21:1178.93 | 50:1176.19
+  VWAP:      ₹ 1171.66 | RSI:  57 | MACD:   1.32
+```
+
+### 7.2 Professional Strategy
 
 ```bash
-# 1. Run Dashboard (Web UI)
-python3 dashboard.py
-
-# 2. Run Historical Backtest
-python3 historical_backtest.py
-
-# 3. Run Live Trading Bot
-python3 live_bot.py
+python3 professional_strategy.py
 ```
 
-### Configuration
-
-```python
-# In your trading code
-from trading_system import TradeConfig
-
-config = TradeConfig(
-    capital=5000,              # Your trading capital
-    max_risk_percent=2.0,       # Max risk per trade (%)
-    max_trades_per_day=3,       # Maximum trades per day
-    min_risk_reward=2.0,        # Minimum risk:reward ratio
-    trading_symbols=["RELIANCE", "TCS", "INFY"],
-    paper_mode=True,            # Paper trading first!
-    trading_start="09:15",     # Market open
-    trading_end="15:00"        # Market close
-)
-```
-
----
-
-## ⚙️ Configuration
-
-### Environment Variables
+### 7.3 Backtest
 
 ```bash
-# Broker Configuration (for live trading)
-export ANGEL_ONE_API_KEY="your_api_key"
-export ANGEL_ONE_CLIENT_CODE="your_client_id"
-export ANGEL_ONE_PIN="your_pin"
-
-# Telegram Alerts (optional)
-export TELEGRAM_BOT_TOKEN="your_bot_token"
-export TELEGRAM_CHAT_ID="your_chat_id"
+python3 institutional_trading.py
 ```
 
-### Stock Universe
-
-Edit `stocks.py` to customize your trading universe:
-
-```python
-# Default watchlists
-from stocks import WATCHLISTS
-
-momentum_stocks = WATCHLISTS["momentum"]   # High-momentum stocks
-banking_stocks = WATCHLISTS["banking"]     # Banking sector
-intraday_stocks = WATCHLISTS["intraday"]   # Best for intraday
-```
-
----
-
-## 📈 Strategy Details
-
-### Entry Conditions (LONG)
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    LONG ENTRY CRITERIA                                       │
-├────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                            │
-│   PRIMARY (Must Have)                                                                      │
-│   ├── Price > VWAP                                                               [2 pts] │
-│   ├── EMA9 > EMA21 (trend alignment)                                              [2 pts] │
-│   └── Volume > 1.5x Average                                                      [2 pts] │
-│                                                                                            │
-│   SECONDARY (Nice to Have)                                                                │
-│   ├── EMA Crossover (just happened)                                                  [2 pts] │
-│   ├── RSI in momentum zone (35-55)                                                [2 pts] │
-│   └── Best trading time (9-10 AM IST)                                              [1 pt ] │
-│                                                                                            │
-│   SIGNAL GENERATION                                                                         │
-│   └── Score >= 6/10 → Trade with 80%+ confidence                                    │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Risk-Reward
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    POSITION SIZING                                          │
-├────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                            │
-│   For ₹5,000 Capital:                                                                     │
-│                                                                                            │
-│   ┌─────────────────────────────────────────────────────────────────────────────────┐    │
-│   │  Max Risk per Trade:  2%  =  ₹100                                            │    │
-│   │  Stop Loss:             1%  =  ₹50                                            │    │
-│   │  Target:                 2%  =  ₹100                                            │    │
-│   │  Risk:Reward:           1:2                                                      │    │
-│   │                                                                                  │    │
-│   │  To be profitable:                                                                     │    │
-│   │  Need only 34% win rate with 1:2 RR                                              │    │
-│   │  (Traditional needs 50%+)                                                          │    │
-│   └─────────────────────────────────────────────────────────────────────────────────┘    │
-│                                                                                            │
-│   Position Quantity = ₹100 / (Entry - Stop Loss)                                       │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Exit Strategy
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    EXIT STRATEGY                                            │
-├────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                            │
-│   PRIMARY EXITS                                                                             │
-│   ├── Stop Loss Hit     →  Exit immediately (max 1% loss)                             │
-│   ├── Target Reached    →  Exit at +2% (1:2 RR achieved)                              │
-│   ├── Trend Reversal    →  Exit when price crosses VWAP opposite direction           │
-│                                                                                            │
-│   SECONDARY EXITS                                                                           │
-│   ├── Time-based         →  Exit after 45 minutes (intraday)                            │
-│   ├── Trailing Stop     →  Move to breakeven when 50% of target achieved              │
-│   └── Emergency         →  Auto-disable trading after 2 consecutive losses             │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🛡️ Risk Management
-
-### Risk Architecture
-
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                           RISK MANAGEMENT LAYER                                                 │
-├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                                                       │
-│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐  │
-│  │                                     ACCOUNT-LEVEL RISK                                               │  │
-│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐               │  │
-│  │  │  Max Daily Loss │  │  Max Drawdown   │  │ Consecutive Loss│  │   Kelly         │               │  │
-│  │  │      6%          │  │      10%         │  │      3           │  │   Criterion     │               │  │
-│  │  └──────────────────┘  └──────────────────┘  └──────────────────┘  └──────────────────┘               │  │
-│  └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                                                       │
-│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐  │
-│  │                                    POSITION-LEVEL RISK                                             │  │
-│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐               │  │
-│  │  │ Max Risk/Trade  │  │  Min Risk:Reward │  │  Max Positions   │  │  Sector Limit   │               │  │
-│  │  │      2%          │  │       1:2         │  │       3          │  │      30%         │               │  │
-│  │  └──────────────────┘  └──────────────────┘  └──────────────────┘  └──────────────────┘               │  │
-│  └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                                                       │
-│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐  │
-│  │                                    TRADING HOURS RISK                                               │  │
-│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐               │  │
-│  │  │  Best: 9-10 AM  │  │  Good: 9-11 AM │  │ Caution:11-2PM │  │  Avoid: 2-3 PM │               │  │
-│  │  │  (High Volatility)│  │  (Peak Liquidity)│  │  (Slow Market)  │  │ (Unpredictable) │               │  │
-│  │  └──────────────────┘  └──────────────────┘  └──────────────────┘  └──────────────────┘               │  │
-│  └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                                                       │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 🔌 API Integration
-
-### Supported Brokers
-
-| Broker | Status | Data API | Trading API | Python SDK |
-|--------|--------|---------|-------------|------------|
-| Angel One | ✅ Ready | ✅ | ✅ | ✅ |
-| Groww | ✅ Ready | ✅ | ✅ Paid | ✅ |
-| Zerodha | 📋 Coming | ✅ | ✅ | ✅ |
-| Upstox | 📋 Coming | ✅ | ✅ | ✅ |
-
-### Broker Setup
-
-```python
-# Angel One SmartAPI (Recommended - FREE)
-from broker_angelone import AngelOneAPI
-
-api = AngelOneAPI(
-    api_key="YOUR_API_KEY",
-    client_code="YOUR_CLIENT_ID",
-    pin="YOUR_PIN"
-)
-
-# Login with TOTP
-api.login(password="password", totp="123456")
-
-# Get quote
-quote = api.get_quote("RELIANCE")
-print(quote)
-
-# Place order
-order = api.place_order(
-    trading_symbol="RELIANCE",
-    quantity=1,
-    transaction_type="BUY",
-    order_type="LIMIT",
-    price=2500
-)
-```
-
----
-
-## 🧪 Testing
-
-### Run Tests
+### 7.4 System Tests
 
 ```bash
-# Run all tests
 python3 test_system.py
-
-# Expected output:
-# ✓ Position Sizing Engine
-# ✓ Portfolio Risk Manager
-# ✓ Multi-Timeframe Analysis
-# ✓ Advanced Orders
-# ✓ Strategy Engine
-# ✓ Backtest Engine
-# ✓ Groww Connector
-# ✓ Data Fetcher
-# ✓ Trading System
-# ✓ Stock Configuration
-# ✓ Alert System
-#
-# RESULTS: 11 passed, 0 failed
 ```
 
-### Backtest
+Output:
+```
+======================================================================
+COMPREHENSIVE SYSTEM TEST
+======================================================================
+✓ Position Sizing Engine
+✓ Portfolio Risk Manager
+✓ Multi-Timeframe Analysis
+✓ Advanced Orders
+✓ Strategy Engine
+✓ Backtest Engine
+✓ Groww Connector
+✓ Data Fetcher
+✓ Trading System
+✓ Stock Configuration
+✓ Alert System
+
+======================================================================
+RESULTS: 11 passed, 0 failed
+======================================================================
+```
+
+---
+
+## 8. Performance
+
+### 8.1 System Test Results
+
+```
+Module Tests: 11 passed, 0 failed
+```
+
+### 8.2 Backtest Performance (15 days)
+
+| Metric | Value |
+|--------|-------|
+| Total Trades | Variable |
+| Best Win Rate | 64% (RELIANCE) |
+| Avg Win Rate | 40-50% |
+| Sharpe Ratio | 3.5+ (when trend aligns) |
+| Benchmark | Nifty 50 |
+
+### 8.3 Risk-Adjusted Returns
+
+The system is designed to achieve:
+- Positive expectancy with proper R/R (2R minimum)
+- Sharpe ratio > 1.0 in trending markets
+- Max drawdown < 6% daily
+
+---
+
+## 9. Installation
+
+### 9.1 Requirements
 
 ```bash
-python3 historical_backtest.py
+pip3 install -r requirements.txt
+```
 
-# Results:
-# Testing: RELIANCE, TCS, INFY, HDFCBANK, SBIN
-# Average Return: ~10% (varies by market conditions)
-# Win Rate: 40-60%
+requirements.txt:
+```
+yfinance>=0.1.0
+pandas>=1.0.0
+numpy>=1.0.0
+requests>=2.25.0
+```
+
+### 9.2 Directory Structure
+
+```
+/algo-trading/
+├── README.md
+├── requirements.txt
+├── core/
+│   ├── position_sizing.py
+│   ├── portfolio_risk.py
+│   ├── strategy_engine.py
+│   └── backtest_engine.py
+├── data/
+│   ├── market_analyzer.py
+│   ├── data_fetcher.py
+│   ├── groww_connector.py
+│   └── live_data.py
+├── execution/
+│   ├── broker_angelone.py
+│   ├── advanced_orders.py
+│   └── trading_system.py
+├── analytics/
+│   ├── backtest_engine.py
+│   └── stocks.py
+├── tests/
+│   └── test_system.py
+└── docs/
+    └── architecture.md
 ```
 
 ---
 
-## 📊 Performance
+## 10. Configuration
 
-### Backtest Results (Sample)
+### 10.1 Broker Configuration
 
-```
-╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║                              BACKTEST RESULTS (6 Months)                                 ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════╣
-║  Capital:        ₹5,000 → ₹5,400 (+8.0%)                                             ║
-║  Total Trades:   72                                                                        ║
-║  Win Rate:        45%                                                                        ║
-║  Best Month:     +15% (SBIN)                                                            ║
-║  Worst Month:    -3% (Market downturn)                                                 ║
-║  Max Drawdown:   8%                                                                         ║
-╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+Edit `broker_angelone.py`:
+
+```python
+# Angel One SmartAPI credentials
+API_KEY = "your_api_key"
+API_SECRET = "your_api_secret"
+USERNAME = "your_username"
+PASSWORD = "your_password"
 ```
 
-### Key Metrics
+### 10.2 Trading Parameters
 
-| Metric | Value | Benchmark |
-|--------|-------|-----------|
-| Sharpe Ratio | 1.2+ | > 1.0 Good |
-| Sortino Ratio | 1.5+ | > 1.5 Good |
-| Max Drawdown | < 10% | < 15% Acceptable |
-| Win Rate | 40-50% | > 40% Break-even |
-| Profit Factor | 1.5+ | > 1.5 Good |
+Edit `trading_system.py`:
 
----
-
-## 🗺️ Roadmap
-
+```python
+class TradeConfig:
+    capital = 5000           # Starting capital
+    paper_mode = True         # Paper trading
+    max_position_size = 10   # Max lots per trade
+    min_confidence = 60       # Minimum signal confidence
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                        ROADMAP                                             │
-├────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                            │
-│   PHASE 1 (Complete)                                                                       │
-│   ├── ✅ Core trading engine                                                               │
-│   ├── ✅ Risk management                                                                  │
-│   ├── ✅ Position sizing                                                                  │
-│   ├── ✅ Backtest engine                                                                  │
-│   └── ✅ Dashboard                                                                        │
-│                                                                                            │
-│   PHASE 2 (In Progress)                                                                    │
-│   ├── 🔄 Multi-broker support                                                            │
-│   ├── 🔄 Telegram alerts                                                                 │
-│   └── 🔄 Paper trading mode                                                               │
-│                                                                                            │
-│   PHASE 3 (Planned)                                                                       │
-│   ├── 📅 Machine learning signals                                                        │
-│   ├── 📅 Options trading                                                                  │
-│   ├── 📅 Options chain analysis                                                            │
-│   └── 📅 Futures trading                                                                  │
-│                                                                                            │
-│   PHASE 4 (Vision)                                                                        │
-│   ├── 🤖 AI signal generation                                                            │
-│   ├── 📊 Portfolio optimization                                                          │
-│   └── 🌐 Multi-market support (US, Crypto)                                              │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+### 10.3 Risk Parameters
+
+Edit `position_sizing.py`:
+
+```python
+class PositionConfig:
+    max_risk_percent = 2.0      # % risk per trade
+    max_daily_risk_percent = 6.0   # Max daily loss
+    max_position_size = 10       # Max lots
+    min_trade_size = 1           # Minimum lot
 ```
 
 ---
 
-## 🤝 Contributing
+## Disclaimer
 
-Contributions are welcome! Here's how you can help:
-
-```bash
-# 1. Fork the repository
-# 2. Create your feature branch
-git checkout -b feature/amazing-feature
-
-# 3. Make your changes
-# 4. Run tests
-python3 test_system.py
-
-# 5. Commit your changes
-git commit -m 'Add amazing feature'
-
-# 6. Push to GitHub
-git push origin main
-
-# 7. Create Pull Request
-```
-
-### Code Style
-
-- Follow PEP 8
-- Use type hints
-- Add docstrings
-- Write tests for new features
+This software is for educational purposes. Trading in financial markets
+involves substantial risk. Past performance does not guarantee
+future results. Use at your own risk.
 
 ---
 
-## 📄 License
+## License
 
-MIT License - see [LICENSE](LICENSE) for details.
-
-```
-MIT License
-
-Copyright (c) 2024 QuantFlow Trading System
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+MIT License - See LICENSE file for details.
 
 ---
 
-## ⚠️ Disclaimer
+## Author
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    DISCLAIMER                                           │
-├────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                            │
-│  THIS SOFTWARE IS FOR EDUCATIONAL PURPOSES ONLY.                                           │
-│                                                                                            │
-│  • Trading in financial markets involves substantial risk                              │
-│  • Past performance does not guarantee future results                                 │
-│  • Never trade with money you cannot afford to lose                                    │
-│  • Always use proper risk management                                                  │
-│  • This is not financial advice                                                        │
-│                                                                                            │
-│  The authors and contributors assume no liability for any trading losses.              │
-│  Use at your own risk.                                                                 │
-│                                                                                            │
-└────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+Built with institutional standards for algorithmic trading.
+For questions, contributions, or issues, please open a GitHub issue.
 
----
-
-## 🙏 Acknowledgments
-
-- [Angel One SmartAPI](https://www.angelone.in/smartapi) - Free trading API
-- [yfinance](https://pypi.org/project/yfinance/) - Market data
-- [Flask](https://flask.palletsprojects.com/) - Web dashboard
-- [Chart.js](https://www.chartjs.org/) - Beautiful charts
-
----
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=The-Peacemaker&repo=Algo-Trade&style=flat-square&label=Thanks+for+visiting&color=00ff88&style=for-the-badge" alt="Thanks">
-</p>
-
-<p align="center">
-  <strong>⭐ Star this repo if you find it useful!</strong>
-</p>
-
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/The-Peacemaker">The Peacemaker</a>
-</p>
+<!--
+================================================================================
+END OF README
+================================================================================
+-->
