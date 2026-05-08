@@ -336,6 +336,17 @@ Module Tests: 11 passed, 0 failed
 
 ### 8.2 Backtest Performance (15 days)
 
+| Symbol | Trades | Win Rate | P&L (Rs.) |
+|--------|--------|---------|-----------|
+| RELIANCE | 28 | 64% | +91.84 |
+| TCS | 12 | 50% | +10.78 |
+| KOTAKBANK | 28 | 43% | +22.36 |
+| INFY | 12 | 50% | +2.60 |
+| HDFCBANK | 21 | 14% | -28.14 |
+| SBIN | 6 | 0% | -24.26 |
+
+![Equity Curve](Image/equity-curve.png)
+
 | Metric | Value |
 |--------|-------|
 | Total Trades | Variable |
