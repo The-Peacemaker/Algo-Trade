@@ -97,8 +97,8 @@ class BacktestEngine:
     def __init__(
         self,
         starting_capital: float = 5000,
-        commission: float = 0,
-        slippage: float = 0
+        commission: float = 0.001,  # 0.1% (Rs.20-50 per Rs.10k)
+        slippage: float = 0.0005     # 0.05% slippage
     ):
         self.starting_capital = starting_capital
         self.commission = commission
@@ -138,15 +138,30 @@ class BacktestEngine:
         else:
             pnl = (entry_price - exit_price) * quantity
         
-        # Apply costs
+        # Apply realistic transaction costs
+        # 1. Brokerage (~0.1% or Rs.20 whichever is lower)
         entry_cost = entry_price * quantity
         exit_cost = exit_price * quantity
-        total_commission = (entry_cost + exit_cost) * self.commission
+        brokerage = min(
+            (entry_cost + exit_cost) * self.commission,
+            50  # Cap at Rs.50 per trade
+        )
         
-        # Slippage (simplified)
+        # 2. STT (Securities Transaction Tax) - only on sell side
+        stt = exit_cost * 0.001 if pnl > 0 else 0  # 0.1% on profit
+        
+        # 3. Sebi Charges (~Rs.15 per crore converted to bps)
+        sebi = (entry_cost + exit_cost) * 0.000001
+        
+        # 4. Stamp Duty (~0.01%)
+        stamp_duty = entry_cost * 0.0001
+        
+        # 5. Slippage (0.05% - market impact)
         slip = (entry_cost + exit_cost) * self.slippage
         
-        net_pnl = pnl - total_commission - slip
+        # Total fees
+        total_fees = brokerage + stt + sebi + stamp_duty + slip
+        net_pnl = pnl - total_fees
         pnl_percent = (net_pnl / entry_cost) * 100
         
         # Holding time
@@ -313,30 +328,30 @@ class BacktestEngine:
         print("BACKTEST RESULTS")
         print("=" * 70)
         
-        print(f"\n📊 CAPITAL PERFORMANCE")
-        print(f"  Starting:      ₹{results.starting_capital:,.0f}")
-        print(f"  Ending:        ₹{results.ending_capital:,.0f}")
-        print(f"  Total Return: ₹{results.total_return:+,.0f} ({results.total_return_percent:+.1f}%)")
+        print(f"\n-- CAPITAL PERFORMANCE")
+        print(f"  Starting:      Rs.{results.starting_capital:,.0f}")
+        print(f"  Ending:        Rs.{results.ending_capital:,.0f}")
+        print(f"  Total Return: Rs.{results.total_return:+,.0f} ({results.total_return_percent:+.1f}%)")
         
-        print(f"\n📈 TRADE STATISTICS")
+        print(f"\n-- TRADE STATISTICS")
         print(f"  Total Trades:    {results.total_trades}")
         print(f"  Winning:         {results.winning_trades}")
         print(f"  Losing:          {results.losing_trades}")
         print(f"  Win Rate:        {results.win_rate}%")
         
-        print(f"\n💰 PROFIT METRICS")
-        print(f"  Gross Profit:    ₹{results.gross_profit:+,.0f}")
-        print(f"  Gross Loss:     ₹{results.gross_loss:,.0f}")
+        print(f"\n-- PROFIT METRICS")
+        print(f"  Gross Profit:    Rs.{results.gross_profit:+,.0f}")
+        print(f"  Gross Loss:     Rs.{results.gross_loss:,.0f}")
         print(f"  Profit Factor:   {results.profit_factor:.2f}")
-        print(f"  Avg Win:         ₹{results.avg_win:+,.0f}")
-        print(f"  Avg Loss:       ₹{results.avg_loss:,.0f}")
+        print(f"  Avg Win:         Rs.{results.avg_win:+,.0f}")
+        print(f"  Avg Loss:       Rs.{results.avg_loss:,.0f}")
         
-        print(f"\n⚠️ RISK METRICS")
-        print(f"  Max Drawdown:    ₹{results.max_drawdown:,.0f} ({results.max_drawdown_percent:.1f}%)")
+        print(f"\n-- RISK METRICS")
+        print(f"  Max Drawdown:    Rs.{results.max_drawdown:,.0f} ({results.max_drawdown_percent:.1f}%)")
         print(f"  Sharpe Ratio:   {results.sharpe_ratio:.2f}")
         print(f"  Sortino Ratio:  {results.sortino_ratio:.2f}")
         
-        print(f"\n⏱️ TIME METRICS")
+        print(f"\n-- TIME METRICS")
         print(f"  Avg Hold Time:   {results.avg_holding_time} min")
         print(f"  Longest:        {results.longest_trade} min")
         print(f"  Shortest:       {results.shortest_trade} min")

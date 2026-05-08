@@ -474,4 +474,93 @@ For questions, contributions, or issues, please open a GitHub issue.
 ================================================================================
 END OF README
 ================================================================================
+
+## Limitations and Disclaimers
+
+### 1. Data Source Limitations
+
+yfinance is intended for **historical data analysis only**, not live execution.
+- Historical data may have 15-60 minute delay
+- Rate limits and throttling apply
+- Unadjusted mid-day splits possible
+
+**For live trading**, use:
+- Angel One WebSocket (SmartAPI)
+- Groww REST API
+- Direct broker connectivity
+
+### 2. Transaction Costs
+
+Backtest results do **not** reflect actual transaction costs:
+
+| Cost Type | Approximate Rate |
+|----------|----------------|
+| Brokerage | Rs.20-50 per order |
+| STT (Securities Transfer Tax) | 0.1% on sell side |
+| Sebi Charges | Rs.15-20 per crore |
+| Stamp Duty | 0.01% (Rs.10 per Rs.1 lakh) |
+| GST | 18% on brokerage |
+
+**Example**: With Rs.10,000 capital and 20 trades:
+- Gross P&L: +Rs.91.84
+- Fees: ~Rs.400 (20 × Rs.20)
+- Net: **-Rs.308.16**
+
+Always simulate realistic fees in backtests.
+
+### 3. Indicator Overfitting Risk
+
+The system implements 15+ indicators. When combining multiple indicators,
+curve-fitting to historical data is a significant risk.
+
+**Recommendation**: Use maximum 3-4 core indicators:
+1. **EMA(21)** - Trend direction
+2. **RSI(14)** - Momentum (overbought/oversold)
+3. **VWAP** - Fair value / support
+
+### 4. Capital Requirements
+
+Minimum recommended capital: Rs.5,000
+
+For smaller capital (Rs.100-500):
+- Higher fee drag as percentage
+- Limited stock selection
+- Higher slippage impact
+- May not be economically viable
+
+### 5. Market Conditions
+
+This system is designed for:
+- **Trending markets** (best performance)
+- **Liquid large-cap stocks** (Nifty 50, Nifty 100)
+
+In sideways markets or with illiquid stocks, performance will degrade significantly.
+
+### 6. No Guarantee of Future Results
+
+Past backtest performance does not guarantee future results.
+Markets change, and patterns that worked historically may not work tomorrow.
+
+Always:
+- Paper trade before live capital
+- Monitor live performance against backtest
+- Implement proper risk controls
+- Stop trading if drawdown exceeds 6%
+
+---
+
+## Disclaimer
+
+This software is for **educational purposes only**. Trading in financial markets
+involves substantial risk, including total loss of capital.
+
+1. **Paper trade first** - Verify system works with simulated trading
+2. **Start small** - Use minimum capital (Rs.5,000) initially
+3. **Monitor closely** - Compare live vs backtest performance
+4. **Risk controls** - Never override stop-loss or daily loss limits
+
+The authors and contributors assume no liability for any losses
+incurred through the use of this software.
+
+================================================================================
 -->
